@@ -18,11 +18,11 @@ builder.Services.AddControllersWithViews()
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(JwtBearerOptions => {
-        JwtBearerOptions.Authority = builder.Configuration["API:Authority"];
-        JwtBearerOptions.Audience = builder.Configuration["API:Audience"];
-    });
+// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//     .AddJwtBearer(JwtBearerOptions => {
+//         JwtBearerOptions.Authority = builder.Configuration["API:Authority"];
+//         JwtBearerOptions.Audience = builder.Configuration["API:Audience"];
+//     });
 builder.Configuration.AddJsonFile("appsettings.*.json", optional: true, reloadOnChange: false);
 
 var app = builder.Build();
