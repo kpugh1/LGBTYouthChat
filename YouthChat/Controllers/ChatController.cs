@@ -22,6 +22,7 @@ public class ChatController : ControllerBase
     public ChatController(IConfiguration config)
     {
         _config = config;
+        
         string? Prompt = System.IO.File.ReadAllText(config.GetConnectionString("Prompt_Path"));
         History = new List<Message>() {
             new Message{
@@ -50,8 +51,7 @@ public class ChatController : ControllerBase
 
         using(HttpClient client = new HttpClient())
         {
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "https://router.huggingface.co/hf-inference/models/01-ai/Yi-1.5-34B-Chat/v1/chat/completions");
-            
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "https://router.huggingface.co/hf-inference/models/HuggingFaceH4/zephyr-7b-beta/v1/chat/completions");
             //Add Headers
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {_config.GetConnectionString("HuggingFace_API")}");
             client.DefaultRequestHeaders
@@ -60,7 +60,7 @@ public class ChatController : ControllerBase
             
             //Add data 
             var data = new {
-                model = "01-ai/Yi-1.5-34B-Chat",
+                model = "HuggingFaceH4/zephyr-7b-beta",
                 messages = History
             };
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(data);
