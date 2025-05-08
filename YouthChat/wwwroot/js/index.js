@@ -4,8 +4,10 @@ const nameBOT = "assistent";
 const namePerson = "user";
 
 $(function () {
-
+    let $Chat = $(".msger-chat");
+    let $Loader = $('.imgLoader');
     var messages = [];
+    
     addChatMessage(nameBOT, imgBOT, "left", "Hey! How may I help you?");
 
     $('#sendButton').click(function () {
@@ -26,7 +28,7 @@ $(function () {
                 contentType: 'application/json',
                 success: function (response) {
                         addChatMessage(nameBOT, imgBOT, "left", response.data);
-                        $('.imgLoader').hide();
+                        $Loader.hide();
                     }
                 });
         addChatMessage(namePerson, imgPerson, "right", message);
@@ -49,14 +51,14 @@ $(function () {
                     </div>
                     `;
 
-        $(".msger-chat").append($(msgHTML));
+        $Chat.append($(msgHTML));
 
         if (side == "left") {
             var loaderHTML = `<div id="dvLoader"><img class="imgLoader" src="/images/loader.gif" /></div>`;
-            $(".msger-chat").append($(loaderHTML));
+            $Chat.append($(loaderHTML));
         }
 
-        $(".msger-chat").scrollTop($(".msger-chat").scrollTop() + 500);
+        $Chat.scrollTop($Chat.scrollTop() + 500);
 
         return false;
     }
